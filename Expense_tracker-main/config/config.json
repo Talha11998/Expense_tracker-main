@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "admin",
+    "password": "Khaja9700367407",
+    "database": "database_1",
+    "host": "35.154.184.146",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "admin",
+    "password": "Khaja9700367407",
+    "database": "database_1",
+    "host": "35.154.184.146",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "admin",
+    "password": "Khaja9700367407",
+    "database": "database_1",
+    "host": "35.154.184.146",
+    "dialect": "mysql"
+  }
+}
