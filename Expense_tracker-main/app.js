@@ -50,7 +50,7 @@ Expense.belongsTo(User);
 // Payment.belongsTo(User);
 
 sequelize
-.sync()
+.sync({ alter: true })
 .then(result => {
     app.listen(3000,()=>{
         console.log("Server is running successfully")

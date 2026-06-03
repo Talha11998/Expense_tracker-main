@@ -16,8 +16,16 @@ function CashfreePayment() {
       mode: "sandbox",
     });
 
-    const response = await axios.post("http://localhost:3000/pay");
+const token = localStorage.getItem("token");
 
+const response = await axios.post(
+  "http://localhost:3000/pay", // request body (empty if not needed)
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+);
     const paymentSessionId = response.data.paymentSessionId;
 
     const checkoutOptions = {

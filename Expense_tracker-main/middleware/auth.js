@@ -1,43 +1,51 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 
-const authenticate = async (req, res, next) => {
+const authenticate = async(req, res, next) => {
   try {
-    const authHeader = req.header("Authorization");
+    let token;
 
-    if (!authHeader) {
-      return res.status(401).json({ success: false, message: "No token provided" });
+    // From Authorization header
+    const authHeader = req.headers.authorization;
+    console.log("authHeader",authHeader);
+    if (authHeader?.startsWith("Bearer ")) {
+      token = authHeader.split(" ")[1];
     }
 
-    // remove "Bearer "
-    const token = authHeader.split(" ")[1];
-
+    // Fallback: token in body
+    if (!token && req.body?.token) {
+      token = req.body.token;
+    }
+    console.log("token",token);
     if (!token) {
-      return res.status(401).json({ success: false, message: "Invalid token format" });
+      return res.status(401).json({
+        success: false,
+        message: "Token not provided",
+      });
     }
 
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
-
-    console.log("decoded token:", decoded);
-
+    console.log("decoded",decoded);
     const user = await User.findByPk(decoded.userId);
-
-    if (!user) {
+  console.log("user",user);
+     if (!user) {
       return res.status(404).json({ success: false, message: "User not found" });
     }
+    console.log("user",user);
 
     req.user = user;
+    console.log("req.user ",req.user );
+
     next();
-
   } catch (err) {
-    console.log(err);
-
+    console.log("error",err);
     return res.status(401).json({
       success: false,
-      message: "Invalid or expired token"
+      message: "Invalid token",
     });
   }
 };
+
 
 module.exports = {
   authenticate

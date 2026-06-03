@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import Login from './Components/Login.jsx'
-import Signup from './Components/Signup.jsx'
-import ExpenseTracker from  './Components/ExpenseTracker.jsx'
+import Login from './Components/Login/Login.jsx'
+import Signup from './Components/Signup/Signup.jsx'
+import ExpenseTracker from  './Components/ExpenseTracker/ExpenseTracker.jsx'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CashfreePayment from './Components/CashfreePayment.jsx'
-import Premium from './Components/Premium.jsx'
+import CashfreePayment from './Components/CashfreePayment/CashfreePayment.jsx'
+import Premium from './Components/Premium/Premium.jsx'
+import PaymentStatus from "./Components/PaymentStatus/PaymentStatus.jsx";
+
 
 function App() {
   
@@ -16,6 +18,8 @@ function App() {
       <Route path="/expensetracker" element={<ExpenseTracker />} />
       <Route path="/CashfreePayment" element={<CashfreePayment />} />
       <Route path="/premium" element={<Premium />} />
+      <Route path="/payment-status/:orderId" element={<PaymentStatus />} />
+
     </Routes>
     </BrowserRouter>
   )

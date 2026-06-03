@@ -18,6 +18,8 @@ function ExpenseTracker() {
   const [isPremiumUser, setIsPremiumUser] = useState(false);
   const token = localStorage.getItem("token");
 
+     
+
   // ----------------------------
   // ADD EXPENSE
   // ----------------------------
@@ -51,13 +53,14 @@ function ExpenseTracker() {
   useEffect(() => {
     const fetchPremiumStatus = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/ispremium", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const token=localStorage.getItem("token");
+        const response = await axios.get("http://localhost:3000/ispremium",{
+          headers:{
+            Authorization:`Bearer ${token}`,
+          }
         });
-
         setIsPremiumUser(response.data.a);
+        console.log("isPremiumUser",isPremiumUser);
       } catch (err) {
         console.log(err);
       }
@@ -110,12 +113,15 @@ function ExpenseTracker() {
 
   const handleLogout = ()=>{
     navigate('/login');
-    localStorage.removeItem(token);
+    localStorage.removeItem("token");
   }
   return (
     <div className="expense-wrapper">
       <div className="expense-card">
         <h1>Expense Tracker</h1>
+        
+      
+      
         <p className="subtitle">Track your daily expenses easily</p>
         <Link to="/premium" className="payment-link">
         Go To Premium Page
@@ -212,6 +218,6 @@ function ExpenseTracker() {
       </div>
     </div>
   );
-}
+};
 
 export default ExpenseTracker;
