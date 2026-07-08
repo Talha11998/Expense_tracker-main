@@ -27,7 +27,6 @@ const expensereportroute=require('./routes/expense_report');
 const downloadRoute=require('./routes/download');
 const expensereport=require('./routes/expense_report');
 
-app.use('/expenseTracker', express.static(path.join(__dirname, 'expenseTracker')))
 app.use('/password',forgotpasswordRoute);
 
 app.use(login_Route);
