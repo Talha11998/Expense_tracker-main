@@ -21,9 +21,12 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("formData",formData);
+    console.log("formData", formData);
     try {
-      await axios.post("http://localhost:3000/signingup", formData);
+      await axios.post(
+        "https://expense-tracker-main-o8jt.onrender.com/signingup",
+        formData,
+      );
 
       alert("Signup successful!");
 

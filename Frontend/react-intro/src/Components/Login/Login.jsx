@@ -23,11 +23,11 @@ const Login = () => {
   // Login function
   const login = async (e) => {
     e.preventDefault();
-  console.log(loginData);
+    console.log(loginData);
     try {
       const response = await axios.post(
-        "http://localhost:3000/user/login",
-        loginData
+        "https://expense-tracker-main-o8jt.onrender.com/user/login",
+        loginData,
       );
 
       alert(response.data.message);
@@ -48,10 +48,10 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/password/forgotpassword",
+        "https://expense-tracker-main-o8jt.onrender.com/password/forgotpassword",
         {
           email: forgotEmail,
-        }
+        },
       );
 
       if (response.status === 202) {

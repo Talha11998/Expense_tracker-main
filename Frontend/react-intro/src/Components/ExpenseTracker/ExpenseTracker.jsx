@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./ExpenseTracker.css";
-import { useNavigate ,Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function ExpenseTracker() {
   const [expense, setExpense] = useState({
@@ -18,8 +18,6 @@ function ExpenseTracker() {
   const [isPremiumUser, setIsPremiumUser] = useState(false);
   const token = localStorage.getItem("token");
 
-     
-
   // ----------------------------
   // ADD EXPENSE
   // ----------------------------
@@ -27,11 +25,15 @@ function ExpenseTracker() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:3000/expense/addexpense", expense, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      await axios.post(
+        "https://expense-tracker-main-o8jt.onrender.com/expense/addexpense",
+        expense,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       alert("Expense added successfully!");
 
@@ -53,14 +55,17 @@ function ExpenseTracker() {
   useEffect(() => {
     const fetchPremiumStatus = async () => {
       try {
-        const token=localStorage.getItem("token");
-        const response = await axios.get("http://localhost:3000/ispremium",{
-          headers:{
-            Authorization:`Bearer ${token}`,
-          }
-        });
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          "https://expense-tracker-main-o8jt.onrender.com/ispremium",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
         setIsPremiumUser(response.data.a);
-        console.log("isPremiumUser",isPremiumUser);
+        console.log("isPremiumUser", isPremiumUser);
       } catch (err) {
         console.log(err);
       }
@@ -74,7 +79,7 @@ function ExpenseTracker() {
   const fetchExpenses = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/expense/getexpenses?page=${page}&limit=${limit}`,
+        `https://expense-tracker-main-o8jt.onrender.com/expense/getexpenses?page=${page}&limit=${limit}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -110,25 +115,23 @@ function ExpenseTracker() {
     });
   };
 
-
-  const handleLogout = ()=>{
-    navigate('/login');
+  const handleLogout = () => {
+    navigate("/login");
     localStorage.removeItem("token");
-  }
+  };
   return (
     <div className="expense-wrapper">
       <div className="expense-card">
         <h1>Expense Tracker</h1>
-        
-      
-      
         <p className="subtitle">Track your daily expenses easily</p>
         <Link to="/premium" className="payment-link">
-        Go To Premium Page
-      </Link>
-      <div className="navbar">
-      <button onClick={handleLogout} className="logout">Logout</button>
-      </div>
+          Go To Premium Page
+        </Link>
+        <div className="navbar">
+          <button onClick={handleLogout} className="logout">
+            Logout
+          </button>
+        </div>
         {/* ---------------- FORM ---------------- */}
         <form onSubmit={addNewExpense} className="expense-form">
           <input
@@ -218,6 +221,6 @@ function ExpenseTracker() {
       </div>
     </div>
   );
-};
+}
 
 export default ExpenseTracker;

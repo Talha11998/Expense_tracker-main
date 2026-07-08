@@ -4,16 +4,16 @@ import axios from "axios";
 
 function PaymentStatus() {
   const { orderId } = useParams();
-  const [status, setStatus] = useState("loading"); 
+  const [status, setStatus] = useState("loading");
   // loading | success | failed
 
   useEffect(() => {
     const verifyPayment = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/payment-status/${orderId}`
+          `https://expense-tracker-main-o8jt.onrender.com/payment-status/${orderId}`,
         );
-        console.log("res.data",res.data);
+        console.log("res.data", res.data);
         if (res.data.data === "Success") {
           setStatus("success");
         } else {
