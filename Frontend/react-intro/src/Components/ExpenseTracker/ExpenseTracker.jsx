@@ -124,9 +124,9 @@ function ExpenseTracker() {
       <div className="expense-card">
         <h1>Expense Tracker</h1>
         <p className="subtitle">Track your daily expenses easily</p>
-        <Link to="/premium" className="payment-link">
+        {isPremiumUser && (<Link to="/premium" className="payment-link">
           Go To Premium Page
-        </Link>
+        </Link>)}
         <div className="navbar">
           <button onClick={handleLogout} className="logout">
             Logout
@@ -216,7 +216,7 @@ function ExpenseTracker() {
           ))}
         </div>
         {!isPremiumUser && (
-          <button onClick={buyPremiumHandler}>Buy Premium</button>
+          <button className="btn" onClick={buyPremiumHandler}>Buy Premium</button>
         )}{" "}
       </div>
     </div>
